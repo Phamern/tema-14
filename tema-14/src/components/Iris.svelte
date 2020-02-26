@@ -5,6 +5,8 @@
 
   const dispatch = createEventDispatcher()
 
+	let doorIcon = './images/door_icon.png';
+
 	let polaroid1 = ''
 	let polaroid2 = ''
 	let polaroid3 = ''
@@ -22,9 +24,9 @@
   ]
   
     let polaroid = [
-    './images/Iris/iris_polaroid1.PNG',
-    './images/Iris/iris_polaroid2.PNG',
-    './images/Iris/iris_polaroid3.PNG',
+      './images/Iris/iris_polaroid1.PNG',
+      './images/Iris/iris_polaroid2.PNG',
+      './images/Iris/iris_polaroid3.PNG',
     ]
 
 	let parallaxInstance
@@ -41,49 +43,41 @@
 			<img src='{backImage}' class='backImage' alt='Background' />
 			<div data-pointer-events='true' use:ready>
 				<div data-depth='.1'>
-						<img src='{images[0]}' alt='parallax' class='image0' />
+						<img src='{images[0]}' alt='parallax' class='room' />
 				</div>
 				<div data-depth='.28'>
-					<img on:click={() =>  polaroid1 = !polaroid1 } src='{images[1]}' alt='parallax' class='image1' />
+					<img on:click={() =>  polaroid1 = !polaroid1 } src='{images[1]}' alt='parallax' class='mirror' />
           {#if polaroid1}
-            <section style='z-index: 100;' on:click={() =>  polaroid1 = !polaroid1 } in:fade out:fade class='fixed'>
-              <img style='z-index: 100;' src='{polaroid[0]}' alt='polaroid' class='polaroid1' />
+            <section on:click={() =>  polaroid1 = !polaroid1 } in:fade out:fade class='fixed'>
+              <img src='{polaroid[0]}' alt='polaroid' class='polaroid1' />
            </section>
 		      {/if}
 				</div>
 				<div data-depth='.2'>
-						<img on:click={() =>  polaroid2 = !polaroid2 } src='{images[2]}' alt='parallax' class='image2'>
+						<img on:click={() =>  polaroid2 = !polaroid2 } src='{images[2]}' alt='parallax' class='character'>
             {#if polaroid2}
-            <section style='z-index: 100;' on:click={() =>  polaroid2 = !polaroid2 } in:fade out:fade class='fixed'>
-              <img style='z-index: 100;' src='{polaroid[1]}' alt='polaroid' class='polaroid1' />
+            <section on:click={() =>  polaroid2 = !polaroid2 } in:fade out:fade class='fixed'>
+              <img src='{polaroid[1]}' alt='polaroid' class='polaroid1' />
            </section>
 		      {/if}
 				</div>
 				<div data-depth='.3'>
-						<img on:click={() =>  polaroid3 = !polaroid3 } src='{images[3]}' alt='parallax' class='image3'>
+						<img on:click={() =>  polaroid3 = !polaroid3 } src='{images[3]}' alt='parallax' class='computer'>
             {#if polaroid3}
-            <section style='z-index: 100;' on:click={() =>  polaroid3 = !polaroid3 } in:fade out:fade class='fixed'>
-              <img style='z-index: 100;' src='{polaroid[2]}' alt='polaroid' class='polaroid1' />
+            <section on:click={() =>  polaroid3 = !polaroid3 } in:fade out:fade class='fixed'>
+              <img src='{polaroid[2]}' alt='polaroid' class='polaroid1' />
            </section>
            {/if}
 				</div>
 				<div data-depth='.08'>
-						<img src='{images[4]}' alt='parallax' class='image4'>
+						<img src='{images[4]}' alt='parallax' class='forground1'>
 				</div>
 				<div data-depth='.12'>
-						<img src='{images[5]}' alt='parallax' class='image5'>
+						<img src='{images[5]}' alt='parallax' class='forground2'>
 				</div>
 			</div>
 		</section>
-			<!-- <h1 on:click={() =>  info = !info } class='clickinfo'>Info</h1> -->
-      <div on:click={() => dispatch('hideMe')} class='backButton'>Back</div>
-		<!-- <section>
-			{#if info}
-        <section on:click={() =>  info = !info } in:fade out:fade class='fixed'>
-          <img src='{polaroid[0]}' alt='polaroid' class='polaroid' />
-        </section>
-			{/if}
-		</section> -->
+      <div on:click={() => dispatch('hideMe')} class='backButton'><img src='{doorIcon}' alt='doorIcon' class='door-icon'/></div>
 </main>
 
 <style>
@@ -94,7 +88,9 @@
 		width: 100vw;
 		place-items: center;
 		overflow: hidden;
-		position: relative;
+		position: fixed;
+		top: 0;
+		left: 0;
 	}
 
 	.backImage {
@@ -110,65 +106,60 @@
     cursor: pointer;
   }
 
-	.image0 {
+	.door-icon {
+		position: absolute;
+		left: 1rem;
+		top: 1rem;
+		width: 35px;
+	}
+
+	.room {
 		width: 110vw;
 		margin-left: -5vw;
 		margin-top: -2vh;
+		cursor: default;
 
 	}
 
-	.image1 {
+	.mirror {
 		position: absolute;
     cursor: pointer;
 		width: 80px;
-		/* z-index: 4; */
 		top: 40vh;
     left: 6vw;
 	}
 
-	.image2 {
+	.character {
     position: absolute;
     cursor: pointer;
-		/* z-index: 4; */
 		width: 580px;
 		top: 70vh;
     left: 25vw;
 	}
 
-	.image3 {
+	.computer {
     position: absolute;
     cursor: pointer;
-		/* z-index: 4; */
 		width: 600px;
     top: 30vh;
 		left: 57vw;
 	}
 
-	.image4 {
+	.forground1 {
     position: absolute;
     cursor: pointer;
-		/* z-index: 4; */
 		width: 400px;
     top: 67vh;
 		left: -2vw;
 	}
 
-	.image5 {
+	.forground2 {
     position: absolute;
     cursor: pointer;
-		/* z-index: 4; */
 		width: 450px;
     top: 70vh;
 		left: 78vw;
 	}
-
-	/* .clickinfo {
-		cursor: pointer;
-		z-index: 5;
-		font-size: 4rem;
-		position: fixed;
-    top: 20vh;
-	} */
 
 	section {
 		display: grid;
@@ -179,13 +170,7 @@
   .polaroid1 {
     width: 80vw;
     z-index: 100;
-  }
-
-	/* .fixed {
 		position: fixed;
-		top: 0;
-		left: -2rem;
-		color: white;
-	} */
+  }
 
 </style>

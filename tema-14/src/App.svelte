@@ -1,9 +1,12 @@
 <script>
 import Doors from './components/Doors.svelte'
+
+let sound = './lofi.mp3'
 </script>
 
 <main>
 	<Doors />
+	<audio src={sound} autoplay loop></audio>
 </main>
 
 <style>
