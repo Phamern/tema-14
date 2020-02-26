@@ -5,8 +5,9 @@
 
   const dispatch = createEventDispatcher()
 
-	let info = ''
-	let info2 = ''
+	let polaroid1 = ''
+	let polaroid2 = ''
+	let polaroid3 = ''
 
 	let backImage = './images/Iris/iris_background.png'
 
@@ -23,6 +24,7 @@
     let polaroid = [
     './images/Iris/iris_polaroid1.PNG',
     './images/Iris/iris_polaroid2.PNG',
+    './images/Iris/iris_polaroid3.PNG',
     ]
 
 	let parallaxInstance
@@ -42,23 +44,28 @@
 						<img src='{images[0]}' alt='parallax' class='image0' />
 				</div>
 				<div data-depth='.28'>
-					<img on:click={() =>  info = !info } src='{images[1]}' alt='parallax' class='image1' />
-          {#if info}
-            <section style='z-index: 100;' on:click={() =>  info = !info } in:fade out:fade class='fixed'>
+					<img on:click={() =>  polaroid1 = !polaroid1 } src='{images[1]}' alt='parallax' class='image1' />
+          {#if polaroid1}
+            <section style='z-index: 100;' on:click={() =>  polaroid1 = !polaroid1 } in:fade out:fade class='fixed'>
               <img style='z-index: 100;' src='{polaroid[0]}' alt='polaroid' class='polaroid1' />
            </section>
 		      {/if}
 				</div>
-				<div  data-depth='.2'>
-						<img on:click={() =>  info2 = !info2 } src='{images[2]}' alt='parallax' class='image2'>
-            {#if info2}
-            <section style='z-index: 100;' on:click={() =>  info2 = !info2 } in:fade out:fade class='fixed'>
+				<div data-depth='.2'>
+						<img on:click={() =>  polaroid2 = !polaroid2 } src='{images[2]}' alt='parallax' class='image2'>
+            {#if polaroid2}
+            <section style='z-index: 100;' on:click={() =>  polaroid2 = !polaroid2 } in:fade out:fade class='fixed'>
               <img style='z-index: 100;' src='{polaroid[1]}' alt='polaroid' class='polaroid1' />
            </section>
 		      {/if}
 				</div>
 				<div data-depth='.3'>
-						<img src='{images[3]}' alt='parallax' class='image3'>
+						<img on:click={() =>  polaroid3 = !polaroid3 } src='{images[3]}' alt='parallax' class='image3'>
+            {#if polaroid3}
+            <section style='z-index: 100;' on:click={() =>  polaroid3 = !polaroid3 } in:fade out:fade class='fixed'>
+              <img style='z-index: 100;' src='{polaroid[2]}' alt='polaroid' class='polaroid1' />
+           </section>
+           {/if}
 				</div>
 				<div data-depth='.08'>
 						<img src='{images[4]}' alt='parallax' class='image4'>

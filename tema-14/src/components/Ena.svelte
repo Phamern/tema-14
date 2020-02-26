@@ -11,7 +11,7 @@
   let polaroid = './images/Polaroid1.png'
   
 	let images = [
-		'./images/Curtain_Animation.png',
+		'./images/Ena/ena_background.png',
 		'./images/Midground.png', 
 		'./images/Character.png', 
 	]
@@ -57,9 +57,9 @@
 		display: grid;
 		height: 100vh;
 		width: 100vw;
-		place-items: center;
+		/* place-items: center; */
 		overflow: hidden;
-		position: relative;
+		position: absolute;
     top: 0;
     left: 0;
 	}
