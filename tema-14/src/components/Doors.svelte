@@ -1,5 +1,4 @@
 <script>
-
   import Clickable from './Clickable.svelte'
 
   let doors = [
@@ -22,4 +21,15 @@
 
 
 <style>
+  .doors {
+    display: grid;
+    grid-auto-flow: column;
+    place-items: center;
+    height: 100vh;
+    /* justify-content: center;
+    align-items: end;
+    padding-bottom: 10vh;
+    gap: 10rem; */
+  }
+
 </style>

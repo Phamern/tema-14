@@ -1,4 +1,6 @@
 <script>
+
+import { fade } from 'svelte/transition'
 import Iris from './Iris.svelte'
 import Caroline from './Caroline.svelte'
 import Ena from './Ena.svelte'
@@ -6,6 +8,12 @@ import Ena from './Ena.svelte'
 export let myNumber;
 
 let show = false;
+
+let doors = [
+  './images/Iris/iris_door.PNG',
+  // './images/Iris/iris_computer.PNG',
+  // './images/Iris/iris_mirror.PNG',
+]
 
 const hideMe = () => {
   show = !show
@@ -15,7 +23,7 @@ const hideMe = () => {
 
 <main>
   {#if show}
-     <div class="firstRoom">
+     <div in:fade out:fade class="room">
       {#if myNumber === 0}
           <Iris on:hideMe={hideMe} />
         {:else if  myNumber === 1}
@@ -25,14 +33,24 @@ const hideMe = () => {
       {/if}
      </div>
   {:else}
-    <div class='clickable' on:click={hideMe}></div>
+    {#each doors as door, i}
+      <div class='clickable' on:click={hideMe}>
+          <img src={doors[i]} alt="doors" class='doors' />
+      </div>
+    {/each}
   {/if}
 </main>
 
 <style>
+
   .clickable {
-    height: 100px;
-    width: 100px;
-    background-color: blue;
+    display: grid;
+    place-items: center;
+    gap: 1rem;
   }
+
+  .doors {
+    width: 15vw;
+  }
+
 </style>

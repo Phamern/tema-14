@@ -1,20 +1,29 @@
 <script>
 	import Parallax from 'parallax-js'
-  import {slide} from 'svelte/transition'
+  import { fade } from 'svelte/transition'
   import { createEventDispatcher } from 'svelte'
 
   const dispatch = createEventDispatcher()
 
 	let info = ''
+	let info2 = ''
 
-	let backImage = './images/Layer_4.png'
-  let polaroid = './images/Polaroid1.png'
+	let backImage = './images/Iris/iris_background.png'
+
   
 	let images = [
-		'./images/Curtain_Animation.png',
-		'./images/Layer_2.png', 
-		'./images/Layer_1.png', 
-	]
+		'./images/Iris/iris_room.PNG',
+		'./images/Iris/iris_mirror.PNG', 
+		'./images/Iris/iris_character.PNG', 
+		'./images/Iris/iris_computer.PNG', 
+		'./images/Iris/iris_forground1.PNG', 
+		'./images/Iris/iris_forground2.PNG', 
+  ]
+  
+    let polaroid = [
+    './images/Iris/iris_polaroid1.PNG',
+    './images/Iris/iris_polaroid2.PNG',
+    ]
 
 	let parallaxInstance
 	const ready = node => {
@@ -32,23 +41,42 @@
 				<div data-depth='.1'>
 						<img src='{images[0]}' alt='parallax' class='image0' />
 				</div>
-				<div data-depth='.28' style='z-index: 10;'>
-						<img src='{images[1]}' alt='parallax' class='image1' on:click={() =>  info = !info } />
+				<div data-depth='.28'>
+					<img on:click={() =>  info = !info } src='{images[1]}' alt='parallax' class='image1' />
+          {#if info}
+            <section style='z-index: 100;' on:click={() =>  info = !info } in:fade out:fade class='fixed'>
+              <img style='z-index: 100;' src='{polaroid[0]}' alt='polaroid' class='polaroid1' />
+           </section>
+		      {/if}
 				</div>
-				<div data-depth='.2'>
-						<img src='{images[2]}' alt='parallax' class='image2'>
+				<div  data-depth='.2'>
+						<img on:click={() =>  info2 = !info2 } src='{images[2]}' alt='parallax' class='image2'>
+            {#if info2}
+            <section style='z-index: 100;' on:click={() =>  info2 = !info2 } in:fade out:fade class='fixed'>
+              <img style='z-index: 100;' src='{polaroid[1]}' alt='polaroid' class='polaroid1' />
+           </section>
+		      {/if}
+				</div>
+				<div data-depth='.3'>
+						<img src='{images[3]}' alt='parallax' class='image3'>
+				</div>
+				<div data-depth='.08'>
+						<img src='{images[4]}' alt='parallax' class='image4'>
+				</div>
+				<div data-depth='.12'>
+						<img src='{images[5]}' alt='parallax' class='image5'>
 				</div>
 			</div>
 		</section>
-			<h1 on:click={() =>  info = !info } class='clickinfo'>Info</h1>
-      <button on:click={() => dispatch('hideMe')}>Hei</button>
-		<section>
+			<!-- <h1 on:click={() =>  info = !info } class='clickinfo'>Info</h1> -->
+      <div on:click={() => dispatch('hideMe')} class='backButton'>Back</div>
+		<!-- <section>
 			{#if info}
-        <section in:slide out:slide class='fixed'>
-          <img src='{polaroid}' alt='polaroid' />
+        <section on:click={() =>  info = !info } in:fade out:fade class='fixed'>
+          <img src='{polaroid[0]}' alt='polaroid' class='polaroid' />
         </section>
 			{/if}
-		</section>
+		</section> -->
 </main>
 
 <style>
@@ -69,51 +97,71 @@
 		top: 0vh;
 	}
 
-  button {
-    height: 100px;
-    width: 100px;
-    background: hotpink;
-    z-index: 100;
+  .backButton {
     position: fixed;
+    font-size: 2rem;
+    cursor: pointer;
   }
 
 	.image0 {
-		width: 150vw;
-		margin-left: -20vw;
-		margin-top: -20vh;
-
-	}
-	.image1 {
-		/* width: 40vw; */
-		margin-top: 20vh;
-		width: 100vw;
-		z-index: 4;
-		margin: 6vh 0 0 -2vw;
-	}
-	.image2 {
-		z-index: 4;
-		width: 100vw;
-		margin-top: 17vh;
-	}
-	/* .image3 {
-		z-index: 4;
 		width: 110vw;
-		margin-left: 65vw;
-	} */
+		margin-left: -5vw;
+		margin-top: -2vh;
 
-	.clickinfo {
-		cursor: pointer;
-		z-index: 5;
-		font-size: 4rem;
-		position: fixed;
 	}
-	.clickinfo {
+
+	.image1 {
+		position: absolute;
+    cursor: pointer;
+		width: 80px;
+		/* z-index: 4; */
+		top: 40vh;
+    left: 6vw;
+	}
+
+	.image2 {
+    position: absolute;
+    cursor: pointer;
+		/* z-index: 4; */
+		width: 580px;
+		top: 70vh;
+    left: 25vw;
+	}
+
+	.image3 {
+    position: absolute;
+    cursor: pointer;
+		/* z-index: 4; */
+		width: 600px;
+    top: 30vh;
+		left: 57vw;
+	}
+
+	.image4 {
+    position: absolute;
+    cursor: pointer;
+		/* z-index: 4; */
+		width: 400px;
+    top: 67vh;
+		left: -2vw;
+	}
+
+	.image5 {
+    position: absolute;
+    cursor: pointer;
+		/* z-index: 4; */
+		width: 450px;
+    top: 70vh;
+		left: 78vw;
+	}
+
+	/* .clickinfo {
 		cursor: pointer;
 		z-index: 5;
 		font-size: 4rem;
 		position: fixed;
     top: 20vh;
-	}
+	} */
 
 	section {
 		display: grid;
@@ -121,14 +169,16 @@
 		font-size: 4rem;
 	}
 
-	.fixed {
-		/* width: 30rem;
-		height: 40rem;
-		background-color: lightblue; */
+  .polaroid1 {
+    width: 80vw;
+    z-index: 100;
+  }
+
+	/* .fixed {
 		position: fixed;
 		top: 0;
 		left: -2rem;
 		color: white;
-	}
+	} */
 
 </style>
