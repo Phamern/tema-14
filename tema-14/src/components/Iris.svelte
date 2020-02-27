@@ -36,6 +36,8 @@
 		parallaxInstance.invert(false, false)
 	}
 
+	$: active = (polaroid1 || polaroid2 || polaroid3) ? true : false
+
 </script>
 
 <main >
@@ -46,28 +48,13 @@
 						<img src='{images[0]}' alt='parallax' class='room' />
 				</div>
 				<div data-depth='.28'>
-					<img on:click={() =>  polaroid1 = !polaroid1 } src='{images[1]}' alt='parallax' class='mirror' />
-          {#if polaroid1}
-            <section on:click={() =>  polaroid1 = !polaroid1 } in:fade out:fade class='fixed'>
-              <img src='{polaroid[0]}' alt='polaroid' class='polaroid1' />
-           </section>
-		      {/if}
+					<img on:click={() =>  { polaroid1 = active ? polaroid1 : !polaroid1} } src='{images[1]}' alt='parallax' class='mirror' />
 				</div>
 				<div data-depth='.2'>
-						<img on:click={() =>  polaroid2 = !polaroid2 } src='{images[2]}' alt='parallax' class='character'>
-            {#if polaroid2}
-            <section on:click={() =>  polaroid2 = !polaroid2 } in:fade out:fade class='fixed'>
-              <img src='{polaroid[1]}' alt='polaroid' class='polaroid1' />
-           </section>
-		      {/if}
+						<img on:click={() =>  {polaroid2 = active ? polaroid2 : !polaroid2} } src='{images[2]}' alt='parallax' class='character'>
 				</div>
 				<div data-depth='.3'>
-						<img on:click={() =>  polaroid3 = !polaroid3 } src='{images[3]}' alt='parallax' class='computer'>
-            {#if polaroid3}
-            <section on:click={() =>  polaroid3 = !polaroid3 } in:fade out:fade class='fixed'>
-              <img src='{polaroid[2]}' alt='polaroid' class='polaroid1' />
-           </section>
-           {/if}
+						<img on:click={() =>  {polaroid3 = active ? polaroid3 : !polaroid3 } } src='{images[3]}' alt='parallax' class='computer'>
 				</div>
 				<div data-depth='.08'>
 						<img src='{images[4]}' alt='parallax' class='forground1'>
@@ -77,11 +64,29 @@
 				</div>
 			</div>
 		</section>
-      <div on:click={() => dispatch('hideMe')} class='backButton'><img src='{doorIcon}' alt='doorIcon' class='door-icon'/></div>
+	{#if polaroid1}
+		<section on:click={() =>  polaroid1 = !polaroid1 } in:fade out:fade class='fixed'>
+			<img src='{polaroid[0]}' alt='polaroid' class='polaroid1' />
+		</section>
+	{/if}
+	{#if polaroid2}
+	<section on:click={() =>  polaroid2 = !polaroid2 } in:fade out:fade class='fixed'>
+		<img src='{polaroid[1]}' alt='polaroid' class='polaroid1' />
+	</section>
+	{/if}
+	 {#if polaroid3}
+		<section on:click={() =>  polaroid3 = !polaroid3 } in:fade out:fade class='fixed'>
+			<img src='{polaroid[2]}' alt='polaroid' class='polaroid1' />
+		</section>
+	{/if}
+
 </main>
+<img on:click={() => dispatch('hideMe')} src='{doorIcon}' alt='doorIcon' class='door-icon'/>
+
+
+
 
 <style>
-
 	main {
 		display: grid;
 		height: 100vh;
@@ -94,23 +99,17 @@
 	}
 
 	.backImage {
-		z-index: 0;
 		width: 100vw;
 		position: absolute;
 		top: 0vh;
 	}
-
-  .backButton {
-    position: fixed;
-    font-size: 2rem;
-    cursor: pointer;
-  }
 
 	.door-icon {
 		position: absolute;
 		left: 1rem;
 		top: 1rem;
 		width: 35px;
+		cursor: pointer;
 	}
 
 	.room {
@@ -147,7 +146,6 @@
 
 	.forground1 {
     position: absolute;
-    cursor: pointer;
 		width: 400px;
     top: 67vh;
 		left: -2vw;
@@ -155,22 +153,25 @@
 
 	.forground2 {
     position: absolute;
-    cursor: pointer;
 		width: 450px;
     top: 70vh;
 		left: 78vw;
 	}
 
 	section {
+		position:fixed;
+		top:0;
+		left:0;
 		display: grid;
 		place-items: center;
 		font-size: 4rem;
+		width: 100vw;
+		height: 100vh;
+		z-index: 1;
 	}
 
-  .polaroid1 {
-    width: 80vw;
-    z-index: 100;
-		position: fixed;
-  }
+ 	section img {
+		 width: 80vw;
+	}
 
 </style>

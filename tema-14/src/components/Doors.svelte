@@ -2,18 +2,18 @@
   import Clickable from './Clickable.svelte'
 
   let doors = [
-    'door1',
-    'door2',
-    'door3',
-  ]
+  './images/Caroline/caroline_door.png',
+  './images/Ena/ena_door.png',
+  './images/Iris/iris_door.PNG',
+]
 
 </script>
 
 <main>
-<h1>overtenking</h1>
+  <h1>Overtenking</h1>
   <section class="doors">
     {#each doors as door, i}
-       <Clickable show='hidden' myNumber={i} />
+       <Clickable  src='{doors[i]}' show='hidden' myNumber={i}/>
     {/each}
   </section>
 
@@ -28,19 +28,18 @@
   }
 
   h1 {
-    margin:0;
+    margin: 0;
     padding: 0;
+    justify-self: center;
+    
   }
+
   .doors {
     display: grid;
     grid-auto-flow: column;
     place-items: center;
     height: 100vh;
-    cursor: pointer;
-    /* justify-content: center;
-    align-items: end;
-    padding-bottom: 10vh;
-    gap: 10rem; */
+    /* cursor: pointer; */
   }
 
 </style>
